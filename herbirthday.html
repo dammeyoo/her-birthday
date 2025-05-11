@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>My Love's Birthday Wishes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Quicksand:wght@400;600;700&display=swap');
+
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+    color: #6f4963;
+  }
+
+  body {
+    background: linear-gradient(135deg, #ffd0e0, #ffe8f3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 350px;
+    max-height: 600px;
+    margin: auto;
+    padding: 20px 15px;
+    position: relative;
+    user-select: none;
+  }
+
+  /* Berterabur flower/heart shapes - multiple absolute positioned with low opacity and gentle blur */
+
+  body::before,
+  body::after,
+  body div.background-shape {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.12;
+    filter: blur(3px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  /* Multiple shapes created with divs positioned scattered */
+  div.background-shape {
+    width: 80px;
+    height: 80px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/616/616408.png'); /* small soft heart */
+  }
+
+  div.shape1 {
+    top: 15px;
+    left: 15px;
+    opacity: 0.14;
+    transform: rotate(-15deg);
+    width: 70px;
+    height: 70px;
+    filter: blur(2.5px);
+  }
+  div.shape2 {
+    top: 70px;
+    right: 20px;
+    opacity: 0.1;
+    width: 60px;
+    height: 60px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/616/616428.png'); /* soft flower */
+    filter: blur(3px);
+    transform: rotate(25deg);
+  }
+  div.shape3 {
+    bottom: 120px;
+    left: 30px;
+    opacity: 0.11;
+    width: 75px;
+    height: 75px;
+    filter: blur(3px);
+    background-image: url('https://cdn-icons-png.flaticon.com/512/616/616440.png'); /* delicate flower */
+    transform: rotate(10deg);
+  }
+  div.shape4 {
+    bottom: 30px;
+    right: 40px;
+    opacity: 0.12;
+    width: 65px;
+    height: 65px;
+    filter: blur(2.8px);
+    background-image: url('https://cdn-icons-png.flaticon.com/512/616/616465.png'); /* soft leaf */
+    transform: rotate(-8deg);
+  }
+  div.shape5 {
+    top: 180px;
+    left: 120px;
+    opacity: 0.1;
+    width: 70px;
+    height: 70px;
+    filter: blur(2.5px);
+    background-image: url('https://cdn-icons-png.flaticon.com/512/616/616411.png'); /* heart shape */
+    transform: rotate(17deg);
+  }
+
+  /* Content boards should have subtle background with some opacity for clarity */
+  .board {
+    background: rgba(252, 233, 239, 0.95);
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 22px rgba(201, 79, 124, 0.35);
+    padding: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+    color: #814763;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+    pointer-events: none;
+    position: relative;
+    z-index: 10;
+  }
+
+  .board.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .board h1 {
+    font-family: 'Sacramento', cursive;
+    font-size: 3.4rem;
+    color: #cc6aa0;
+    margin-bottom: 8px;
+    text-shadow: 1px 2px 8px rgba(204, 106, 160, 0.3);
+  }
+
+  .board h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #a55a7b;
+  }
+
+  .board p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 330px;
+    margin: 0 auto 18px auto;
+    color: #7a5068;
+  }
+
+  #intro-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(201, 79, 124, 0.45);
+    margin: 0 auto 18px auto;
+    transition: transform 0.6s ease;
+    cursor: pointer;
+    border: 6px solid #ffc7d1;
+  }
+
+  #intro-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #intro-photo:hover {
+    transform: scale(1.08) rotate(2deg);
+  }
+
+  button {
+    background: #cc6aa0;
+    border: none;
+    border-radius: 32px;
+    padding: 14px 38px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(204, 106, 160, 0.6);
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    position: relative;
+    z-index: 10;
+  }
+
+  button:hover,
+  button:focus {
+    background: #a8557a;
+    box-shadow: 0 8px 25px rgba(168, 79, 114, 0.8);
+  }
+
+  /* Hide the last board's Next button */
+  #btn-finish {
+    background: #ff9bc3;
+    color: #66283c;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  #btn-finish:hover,
+  #btn-finish:focus {
+    background: #d06e8c;
+  }
+
+  /* For mobile & small screens */
+  @media (max-width: 350px) {
+    body {
+      padding: 16px 10px;
+      max-height: 600px;
+      max-width: 320px;
+    }
+    .board {
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .board h1 {
+      font-size: 2.8rem;
+    }
+    .board h2 {
+      font-size: 1.3rem;
+    }
+    #intro-photo {
+      width: 150px;
+      height: 150px;
+      border-width: 5px;
+      margin-bottom: 14px;
+    }
+    button {
+      padding: 12px 30px;
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Background shapes scattered -->
+  <div class="background-shape shape1"></div>
+  <div class="background-shape shape2"></div>
+  <div class="background-shape shape3"></div>
+  <div class="background-shape shape4"></div>
+  <div class="background-shape shape5"></div>
+
+  <section id="intro" class="board active" aria-live="polite" aria-label="Introduction birthday board">
+    <h1>Happy Birthday, My Love 💖</h1>
+    <div id="intro-photo" title="Click to see your smile!">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Beautiful Fiancée" />
+    </div>
+    <h2>To my dear fiancée, my heart</h2>
+    <p>Today we celebrate the brightest star in my life — you. I can’t wait to spend forever by your side.</p>
+    <button id="btn-next-1" aria-controls="point" aria-label="Go to first birthday wish">Next</button>
+  </section>
+
+  <section id="point" class="board" aria-live="polite" aria-label="Birthday wishes point board">
+    <h1>My Wishes for You</h1>
+    <h2>From my heart to yours</h2>
+    <p>
+      May your days be filled with endless joy and your nights with peaceful dreams.
+      You inspire me every single day with your kindness, strength, and beauty inside & out.
+    </p>
+    <p>
+      Together, we’ll write the most beautiful story of love and happiness. Happy Birthday, my forever!
+    </p>
+    <button id="btn-next-2" aria-controls="outro" aria-label="Go to closing birthday message">Next</button>
+  </section>
+
+  <section id="outro" class="board" aria-live="polite" aria-label="Closing birthday board">
+    <h1>Forever Yours</h1>
+    <h2>With all my heart</h2>
+    <p>
+      Every moment with you feels like a precious gift,
+      and I am endlessly grateful to call you mine.
+    </p>
+    <p>Here’s to your happiest birthday yet, with love beyond words. I adore you endlessly.</p>
+    <button id="btn-finish" aria-label="End birthday wishes">Thank You, My Love 💝</button>
+  </section>
+
+<script>
+  // Select boards and buttons
+  const intro = document.getElementById('intro');
+  const point = document.getElementById('point');
+  const outro = document.getElementById('outro');
+
+  const btnNext1 = document.getElementById('btn-next-1');
+  const btnNext2 = document.getElementById('btn-next-2');
+  const btnFinish = document.getElementById('btn-finish');
+
+  // Show/hide function for boards
+  function showBoard(show, hide1, hide2) {
+    show.classList.add('active');
+    hide1.classList.remove('active');
+    hide2.classList.remove('active');
+    show.querySelector('button').focus();
+  }
+
+  // Button event listeners
+  btnNext1.addEventListener('click', () => showBoard(point, intro, outro));
+  btnNext2.addEventListener('click', () => showBoard(outro, intro, point));
+  btnFinish.addEventListener('click', () => {
+    btnFinish.disabled = true;
+    btnFinish.textContent = 'Love You Forever 💖';
+    btnFinish.style.cursor = 'default';
+  });
+
+  // Friendly interaction: clicking photo to go next
+  document.getElementById('intro-photo').addEventListener('click', () => showBoard(point, intro, outro));
+</script>
+
+</body>
+</html>
